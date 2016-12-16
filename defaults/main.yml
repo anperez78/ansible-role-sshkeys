@@ -1,0 +1,7 @@
+---
+ssh_keys_mode:            # [client|server]
+ssh_keys_client_home:     # jenkins_home
+ssh_keys_client_owner:    # 'jenkins'
+ssh_keys_client_group:    # 'jenkins'
+ssh_keys_server_user:     # 'jenkins'
+ssh_keys_server_password: #'myamazingpassword'

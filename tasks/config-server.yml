@@ -1,0 +1,23 @@
+---
+- name: Setup | create user
+  command: useradd -m {{ ssh_keys_server_user }} creates=/home/{{ ssh_keys_server_user }}
+
+- name: Setup | set user password
+  shell: usermod -p $(echo '{{ ssh_keys_server_password }}' | openssl passwd -1 -stdin) {{ ssh_keys_server_user }}
+
+- name: Setup | authorized key upload
+  authorized_key:
+    user: "{{ ssh_keys_server_user }}"
+    key: "{{ item }}"
+    path: '/home/{{ ssh_keys_server_user }}/.ssh/authorized_keys'
+    manage_dir: no
+  with_file:
+    - 'files/ssh_keys/id_jenkins_rsa.pub'
+
+- name: Sudoers | update sudoers file and validate
+  lineinfile:
+    dest: /etc/sudoers
+    insertafter: EOF
+    line: '{{ ssh_keys_server_user }} ALL=(ALL) NOPASSWD: ALL'
+    regexp: '{{ ssh_keys_server_user }} ALL=(ALL) NOPASSWD: ALL'
+    state: present

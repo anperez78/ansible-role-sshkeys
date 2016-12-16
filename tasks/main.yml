@@ -1,0 +1,6 @@
+---
+- include: config-client.yml
+  when: ssh_keys_mode == "client"
+
+- include: config-server.yml
+  when: ssh_keys_mode == "server"

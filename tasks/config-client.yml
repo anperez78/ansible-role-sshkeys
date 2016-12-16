@@ -1,0 +1,17 @@
+---
+- name: Create SSH folder
+  file:
+    path: "{{ ssh_keys_client_home }}/.ssh"
+    state: directory
+    mode: 0755
+
+- name: Copy SSH private & public keys
+  copy:
+    src: files/ssh_keys/{{ item }}
+    dest: "{{ ssh_keys_client_home }}/.ssh/{{ item }}"
+    owner: "{{ ssh_keys_client_owner }}"
+    group: "{{ ssh_keys_client_group }}"
+    mode: 0400
+  with_items:
+    - 'id_jenkins_rsa'
+    - 'id_jenkins_rsa.pub'
