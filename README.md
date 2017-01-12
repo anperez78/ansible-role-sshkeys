@@ -10,22 +10,14 @@ Keys can be generated with:
 Enter file in which to save the key ->
 
 
-Role Variables
---------------
+### Role Variables
 
 The variables that can be passed to this role can be found [here] (./defaults/main.yml)
 
-Dependencies
-------------
+### Dependencies
 
 N/A
 
-License
--------
+### License
 
 MIT
-
-Author Information
-------------------
-
-Antonio Pérez
